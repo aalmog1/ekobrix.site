@@ -210,6 +210,11 @@
   .stat-num { font-family:'Inter',sans-serif; font-size:3.2rem; font-weight:800; color:var(--bg); line-height:1; }
   .stat-label { margin-top:.4rem; font-size:.85rem; color:rgba(244,240,232,.6); }
 
+  .contact-form-fields {
+    display: flex;
+    flex-flow: column;
+    gap: 15px;
+  }
   /* WORKFLOW */
   #workflow { background: var(--accent-soft); }
   .workflow-header { max-width:500px; margin-bottom:4rem; }
@@ -257,10 +262,18 @@
   .price-card.featured .price-btn { background:var(--ink); color:var(--bg); border-color:transparent; }
   .price-card.featured .price-btn:hover { background:rgba(30,42,31,.85); }
 
-  /* CTA */
+  /* CTA / CONTACT */
   .cta-section { text-align:center; }
   .cta-inner { max-width:580px; margin:0 auto; }
-  .cta-inner p { color:var(--ink-60); margin:1rem 0 2.2rem; font-size:1.05rem; line-height:1.65; }
+  .cta-inner p { color:var(--ink-60); margin:1rem 0 1.5rem; font-size:1.05rem; line-height:1.65; }
+  .contact-form { display:grid; gap:1.5rem; margin-top:2rem; text-align:left; max-width:360px; margin-left:auto; margin-right:auto; }
+  .contact-form label { font-size:.85rem; font-weight:600; color:var(--ink); display:block; margin-bottom:.25rem; }
+  .contact-form input { width:100%; padding:.75rem 1rem; border:1.5px solid var(--ink-20); border-radius:6px; font-family:'Inter',sans-serif; font-size:.95rem; color:var(--ink); background:var(--bg); }
+  .contact-form input:focus { outline:none; border-color:var(--accent); }
+  .contact-form button[type="submit"] { margin-top:.5rem; cursor:pointer; }
+  .form-status { font-size:.9rem; margin-top:.5rem; min-height:1.4em; display:none; }
+  .form-status.success { display:block; color:var(--accent); font-weight:600; font-size:1.2rem; margin-top:1.5rem; text-align:center; }
+  .form-status.error { display:block; color:#c23; font-weight:500; }
 
   /* FOOTER */
   footer { background:var(--ink); padding:2.5rem 5vw; border-top:1px solid rgba(255,255,255,.06); }
@@ -340,8 +353,7 @@
     <li><a href="#features">Features</a></li>
     <li><a href="#assistant">AI Assistant</a></li>
     <li><a href="#workflow">Workflow</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#" class="nav-cta" data-tooltip="Coming soon">Get Started</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
   </ul>
 </nav>
 
@@ -357,9 +369,9 @@
     </p>
 
     <div class="hero-actions">
-      <a href="#" class="btn-primary" data-tooltip="Coming soon">
+      <a href="#contact" class="btn-primary">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Start Free Trial
+        Contact Us
       </a>
       <a href="#assistant" class="btn-outline">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
@@ -519,9 +531,7 @@
         <span class="pill">Risk alerts</span>
         <span class="pill">Predictive scheduling</span>
       </div>
-      <div style="margin-top:2rem">
-        <a href="#" class="btn-primary" data-tooltip="Coming soon">Try the AI Assistant →</a>
-      </div>
+     
     </div>
   </div>
 </section>
@@ -570,66 +580,32 @@
   </div>
 </section>
 
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="pricing-header reveal">
-    <div class="section-eyebrow">Pricing</div>
-    <h2>Simple, transparent pricing</h2>
-    <p>No hidden fees. Cancel anytime.</p>
-  </div>
-  <div class="pricing-grid">
-
-    <div class="price-card reveal">
-      <div class="price-name">Starter</div>
-      <div class="price-amount"><sup>$</sup>49</div>
-      <div class="price-sub">per user / month</div>
-      <ul class="price-features">
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 3 active projects</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Basic AI insights</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Task & document management</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
-      </ul>
-      <button class="price-btn" data-tooltip="Coming soon">Get Started</button>
-    </div>
-
-    <div class="price-card featured reveal">
-      <div class="price-badge">Most Popular</div>
-      <div class="price-name">Professional</div>
-      <div class="price-amount"><sup>$</sup>129</div>
-      <div class="price-sub">per user / month</div>
-      <ul class="price-features">
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited projects</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Full Brix AI assistant</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Advanced analytics & reports</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Budget forecasting</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
-      </ul>
-      <button class="price-btn" data-tooltip="Coming soon">Start Free Trial</button>
-    </div>
-
-    <div class="price-card reveal">
-      <div class="price-name">Enterprise</div>
-      <div class="price-amount">Custom</div>
-      <div class="price-sub">volume pricing</div>
-      <ul class="price-features">
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom AI model training</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSO & enterprise security</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account manager</li>
-        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SLA guarantee</li>
-      </ul>
-      <button class="price-btn" data-tooltip="Coming soon">Contact Sales</button>
-    </div>
-
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
   <div class="cta-inner reveal">
-    <h2>Ready to build smarter?</h2>
-    <p>Join thousands of construction professionals delivering projects on time and on budget — powered by AI that never sleeps.</p>
-    <a href="#" class="btn-primary" style="font-size:1rem;padding:.95rem 2.4rem;display:inline-flex;margin:0 auto" data-tooltip="Coming soon">Start Your Free Trial →</a>
+    <h2>Contact Us</h2>
+    <p>Get in touch — we’d love to share more about EkoBrix and send you further details.</p>
+    <!-- Replace YOUR_FORMSPREE_FORM_ID with your form ID from https://formspree.io (set recipient to arik@ekobrix.com) -->
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/mzdjbedn" method="POST">
+      <input type="hidden" name="_subject" value="Contact Us - EkoBrix">
+      <input type="hidden" name="message" value="I'm interested in EkoBrix. Please send me further details.">
+      <div id="contact-form-fields" class="contact-form-fields">
+        <div>
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="name" required placeholder="Your name">
+        </div>
+        <div>
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="email" required placeholder="you@example.com">
+        </div>
+        <div>
+          <label for="contact-phone">Phone</label>
+          <input type="tel" id="contact-phone" name="phone" placeholder="+1 (555) 000-0000">
+        </div>
+        <button type="submit" class="btn-primary" style="font-size:1rem;padding:.95rem 2.4rem;width:100%;justify-content:center">Send message →</button>
+      </div>
+      <div id="form-status" class="form-status" aria-live="polite"></div>
+    </form>
   </div>
 </section>
 
@@ -637,16 +613,47 @@
 <footer>
   <div class="footer-inner">
     <a href="#" class="footer-logo" data-tooltip="Coming soon">eko<span>brix</span></a>
-    <div class="footer-copy">© 2025 EkoBrix Inc. All rights reserved.</div>
+    <div class="footer-copy">© 2026 EkoBrix All rights reserved.</div>
     <div class="footer-links">
-      <a href="#" data-tooltip="Coming soon">Privacy</a>
-      <a href="#" data-tooltip="Coming soon">Terms</a>
-      <a href="#" data-tooltip="Coming soon">Contact</a>
+     
     </div>
   </div>
 </footer>
 
 <script>
+  // Contact form: send directly via Formspree (no email client)
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var status = document.getElementById('form-status');
+    var btn = form.querySelector('button[type="submit"]');
+    status.textContent = '';
+    status.className = 'form-status';
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.ok) {
+          document.getElementById('contact-form-fields').style.display = 'none';
+          status.textContent = "Thank you for contacting us! We'll be in touch soon.";
+          status.className = 'form-status success';
+          form.reset();
+        } else {
+          status.textContent = 'Something went wrong. Please try again or email arik@ekobrix.com';
+          status.className = 'form-status error';
+        }
+      })
+      .catch(function() {
+        status.textContent = 'Something went wrong. Please try again or email arik@ekobrix.com';
+        status.className = 'form-status error';
+      })
+      .finally(function() {
+        btn.disabled = false;
+        btn.textContent = 'Send message →';
+      });
+  });
+
   // Scroll reveal
   const observer = new IntersectionObserver(
     es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }),
@@ -666,15 +673,18 @@
     }, 16);
   }
   let done = false;
-  new IntersectionObserver(es => {
-    if(es[0].isIntersecting && !done) {
-      done = true;
-      counter('stat1', 1240, '',  1800);
-      counter('stat2', 23,   '%', 1600);
-      counter('stat3', 41,   '%', 1800);
-      counter('stat4', 18,   'k', 1400);
-    }
-  }, { threshold: 0.3 }).observe(document.querySelector('.stats'));
+  const statsEl = document.querySelector('.stats');
+  if (statsEl && getComputedStyle(statsEl).display !== 'none') {
+    new IntersectionObserver(es => {
+      if(es[0].isIntersecting && !done) {
+        done = true;
+        counter('stat1', 1240, '',  1800);
+        counter('stat2', 23,   '%', 1600);
+        counter('stat3', 41,   '%', 1800);
+        counter('stat4', 18,   'k', 1400);
+      }
+    }, { threshold: 0.3 }).observe(statsEl);
+  }
 </script>
 </body>
 </html>
