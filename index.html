@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Production: set content to your deployed eco.dashboard origin (no trailing slash), e.g. https://app.ekobrix.com -->
-<meta name="ecobrix-dashboard-url" content="http://localhost:4200">
+<!-- Override per environment if needed (no trailing slash) -->
+<meta name="ecobrix-dashboard-url" content="https://app-dev.ekobrix.com">
 <title>EkoBrix — AI-Powered Construction Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -382,7 +382,6 @@
 <nav>
   <a href="#" class="logo" data-tooltip="Coming soon">eko<span>brix</span></a>
   <div class="nav-right">
-    <a href="#" class="nav-login" id="nav-login" rel="noopener noreferrer">Log in</a>
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#assistant">AI Assistant</a></li>
@@ -390,6 +389,7 @@
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#contact" class="nav-cta">Contact Us</a></li>
     </ul>
+    <a href="#" class="nav-login" id="nav-login" rel="noopener noreferrer">Log in</a>
   </div>
 </nav>
 
@@ -717,7 +717,7 @@
       var meta = document.querySelector('meta[name="ecobrix-dashboard-url"]');
       var c = meta && meta.getAttribute('content');
       if (c && String(c).trim()) return String(c).replace(/\/$/, '');
-      return 'http://localhost:4200';
+      return 'https://app-dev.ekobrix.com';
     }
 
     var billingInterval = 'monthly';
