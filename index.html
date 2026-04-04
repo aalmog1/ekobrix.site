@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Production: set content to your deployed eco.dashboard origin (no trailing slash), e.g. https://app.ekobrix.com -->
+<meta name="ecobrix-dashboard-url" content="http://localhost:4200">
 <title>EkoBrix — AI-Powered Construction Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -43,6 +45,14 @@
   .nav-links a:hover { color:var(--ink); }
   .nav-cta { background:var(--ink) !important; color:var(--bg) !important; padding:.5rem 1.3rem; border-radius:6px; font-weight:600 !important; transition:background .2s !important; }
   .nav-cta:hover { background:var(--accent) !important; }
+  .nav-right { display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; justify-content:flex-end; }
+  .nav-login {
+    font-family:'Inter',sans-serif; font-size:.88rem; font-weight:600;
+    color:var(--ink-60); text-decoration:none; padding:.5rem 0;
+    border:none; background:transparent; cursor:pointer;
+    transition:color .2s;
+  }
+  .nav-login:hover { color:var(--ink); }
 
   /* HERO */
   .hero {
@@ -262,6 +272,28 @@
   .price-card.featured .price-btn { background:var(--ink); color:var(--bg); border-color:transparent; }
   .price-card.featured .price-btn:hover { background:rgba(30,42,31,.85); }
 
+  .pricing-toggle-wrap {
+    display:flex; justify-content:center; align-items:center; gap:1rem;
+    flex-wrap:wrap; margin-bottom:2.5rem;
+  }
+  .pricing-toggle-label { font-size:.8rem; font-weight:600; color:rgba(244,240,232,.45); font-family:'Inter',sans-serif; }
+  .pricing-toggle {
+    display:inline-flex; background:rgba(255,255,255,.08); border-radius:8px; padding:4px;
+    border:1px solid rgba(255,255,255,.1);
+  }
+  .pricing-toggle button {
+    background:transparent; border:none;
+    color:rgba(244,240,232,.5); padding:.5rem 1.25rem; border-radius:6px;
+    cursor:pointer; font-family:'Inter',sans-serif; font-weight:600; font-size:.82rem;
+    transition:background .2s, color .2s;
+  }
+  .pricing-toggle button.active { background:var(--accent); color:var(--bg); }
+  .pricing-toggle button:not(.active):hover { color:rgba(244,240,232,.85); }
+  .pricing-yearly-hint {
+    text-align:center; font-size:.8rem; color:rgba(244,240,232,.45);
+    margin:-1.25rem auto 2rem; max-width:480px; font-family:'Inter',sans-serif;
+  }
+
   /* CTA / CONTACT */
   .cta-section { text-align:center; }
   .cta-inner { max-width:580px; margin:0 auto; }
@@ -349,12 +381,16 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="logo" data-tooltip="Coming soon">eko<span>brix</span></a>
-  <ul class="nav-links">
-    <li><a href="#features">Features</a></li>
-    <li><a href="#assistant">AI Assistant</a></li>
-    <li><a href="#workflow">Workflow</a></li>
-    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
-  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-login" id="nav-login" rel="noopener noreferrer">Log in</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#assistant">AI Assistant</a></li>
+      <li><a href="#workflow">Workflow</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -369,11 +405,11 @@
     </p>
 
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
+      <a href="#pricing" class="btn-primary">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Contact Us
+        Get started
       </a>
-     
+      <a href="#contact" class="btn-outline">Contact us</a>
     </div>
 
     <div class="dashboard-wrap">
@@ -577,6 +613,63 @@
   </div>
 </section>
 
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header reveal">
+    <div class="section-eyebrow">Pricing</div>
+    <h2>Choose your plan</h2>
+    <p>Select a plan and continue to create your EkoBrix account. Already have an account? <a href="#" id="pricing-inline-login" class="nav-login" style="display:inline;color:var(--light-green);text-decoration:underline;padding:0">Log in</a>.</p>
+  </div>
+  <div class="pricing-toggle-wrap reveal">
+    <span class="pricing-toggle-label">Billing</span>
+    <div class="pricing-toggle" role="group" aria-label="Billing period">
+      <button type="button" class="active" id="billing-monthly" data-interval="monthly">Monthly</button>
+      <button type="button" id="billing-yearly" data-interval="yearly">Yearly</button>
+    </div>
+  </div>
+  <p class="reveal pricing-yearly-hint" id="yearly-savings-hint" hidden>17% savings vs paying monthly for 12 months</p>
+  <div class="pricing-grid">
+    <div class="price-card reveal" data-plan-id="starter" data-monthly="29">
+      <div class="price-name">Starter</div>
+      <div class="price-amount"><sup>$</sup><span class="js-plan-amount">29</span></div>
+      <div class="price-sub js-plan-sub">per month</div>
+      <ul class="price-features">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 5 team members</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Basic project management</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>10GB storage</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Email support</li>
+      </ul>
+      <button type="button" class="price-btn js-choose-plan">Choose Starter</button>
+    </div>
+    <div class="price-card featured reveal" data-plan-id="professional" data-monthly="79">
+      <div class="price-badge">Popular</div>
+      <div class="price-name">Professional</div>
+      <div class="price-amount"><sup>$</sup><span class="js-plan-amount">79</span></div>
+      <div class="price-sub js-plan-sub">per month</div>
+      <ul class="price-features">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Up to 25 team members</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Advanced project management</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100GB storage</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Custom integrations &amp; reporting</li>
+      </ul>
+      <button type="button" class="price-btn js-choose-plan">Choose Professional</button>
+    </div>
+    <div class="price-card reveal" data-plan-id="enterprise" data-monthly="199">
+      <div class="price-name">Enterprise</div>
+      <div class="price-amount"><sup>$</sup><span class="js-plan-amount">199</span></div>
+      <div class="price-sub js-plan-sub">per month</div>
+      <ul class="price-features">
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Unlimited team members</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Enterprise PM &amp; storage</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>24/7 phone support</li>
+        <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>SSO &amp; custom setup</li>
+      </ul>
+      <button type="button" class="price-btn js-choose-plan">Choose Enterprise</button>
+    </div>
+  </div>
+</section>
+
 <!-- CTA / CONTACT -->
 <section class="cta-section" id="contact">
   <div class="cta-inner reveal">
@@ -612,12 +705,92 @@
     <a href="#" class="footer-logo" data-tooltip="Coming soon">eko<span>brix</span></a>
     <div class="footer-copy">© 2026 EkoBrix All rights reserved.</div>
     <div class="footer-links">
-     
+      <a href="#pricing">Pricing</a>
+      <a href="#" id="footer-login" rel="noopener noreferrer">Log in</a>
     </div>
   </div>
 </footer>
 
 <script>
+  (function () {
+    function getDashboardBase() {
+      var meta = document.querySelector('meta[name="ecobrix-dashboard-url"]');
+      var c = meta && meta.getAttribute('content');
+      if (c && String(c).trim()) return String(c).replace(/\/$/, '');
+      return 'http://localhost:4200';
+    }
+
+    var billingInterval = 'monthly';
+
+    function yearlyTotalUsd(monthly) {
+      return Math.floor(monthly * 12 * 0.83);
+    }
+
+    function refreshPricingLabels() {
+      document.querySelectorAll('.price-card[data-plan-id]').forEach(function (card) {
+        var monthly = parseInt(card.getAttribute('data-monthly'), 10);
+        var amtEl = card.querySelector('.js-plan-amount');
+        var subEl = card.querySelector('.js-plan-sub');
+        if (!amtEl || !subEl || isNaN(monthly)) return;
+        if (billingInterval === 'yearly') {
+          var y = yearlyTotalUsd(monthly);
+          var eq = Math.floor(y / 12);
+          amtEl.textContent = String(eq);
+          subEl.textContent = 'per month, billed yearly ($' + y + '/yr)';
+        } else {
+          amtEl.textContent = String(monthly);
+          subEl.textContent = 'per month';
+        }
+      });
+      var hint = document.getElementById('yearly-savings-hint');
+      if (hint) hint.hidden = billingInterval !== 'yearly';
+    }
+
+    function setBillingInterval(interval) {
+      billingInterval = interval === 'yearly' ? 'yearly' : 'monthly';
+      var mBtn = document.getElementById('billing-monthly');
+      var yBtn = document.getElementById('billing-yearly');
+      if (mBtn) mBtn.classList.toggle('active', billingInterval === 'monthly');
+      if (yBtn) yBtn.classList.toggle('active', billingInterval === 'yearly');
+      refreshPricingLabels();
+    }
+
+    function wireDashboardLinks() {
+      var base = getDashboardBase();
+      var loginUrl = base + '/login';
+      ['nav-login', 'footer-login', 'pricing-inline-login'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.setAttribute('href', loginUrl);
+      });
+    }
+
+    function wirePricingSection() {
+      var mBtn = document.getElementById('billing-monthly');
+      var yBtn = document.getElementById('billing-yearly');
+      if (mBtn) mBtn.addEventListener('click', function () { setBillingInterval('monthly'); });
+      if (yBtn) yBtn.addEventListener('click', function () { setBillingInterval('yearly'); });
+
+      var grid = document.querySelector('.pricing-grid');
+      if (grid) {
+        grid.addEventListener('click', function (e) {
+          var t = e.target;
+          if (!t.classList || !t.classList.contains('js-choose-plan')) return;
+          var card = t.closest('[data-plan-id]');
+          if (!card) return;
+          var planId = card.getAttribute('data-plan-id');
+          var base = getDashboardBase();
+          var url = base + '/registration?plan=' + encodeURIComponent(planId) +
+            '&interval=' + encodeURIComponent(billingInterval);
+          window.location.href = url;
+        });
+      }
+    }
+
+    wireDashboardLinks();
+    wirePricingSection();
+    refreshPricingLabels();
+  })();
+
   // Contact form: send directly via Formspree (no email client)
   document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
