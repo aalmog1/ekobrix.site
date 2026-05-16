@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Override per environment if needed (no trailing slash) -->
+<meta name="ecobrix-dashboard-url" content="https://app-dev.ekobrix.com">
+<title>License Agreement — EkoBrix</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:      #f4f0e8;
+    --ink:     #1e2a1f;
+    --accent:  #5a7a3a;
+    --ink-60:  rgba(30,42,31,.6);
+    --ink-20:  rgba(30,42,31,.14);
+    --ink-08:  rgba(30,42,31,.07);
+    --accent-soft: rgba(90,122,58,.1);
+    --light-green: #8fbb6a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+  footer { flex-shrink: 0; }
+
+  /* NAV (shared with index) */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(244,240,232,.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--ink-20);
+  }
+  .logo { font-family:'Inter',sans-serif; font-weight:800; font-size:1.45rem; letter-spacing:-.03em; color:var(--ink); text-decoration:none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display:flex; gap:2.4rem; list-style:none; align-items:center; }
+  .nav-links a { color:var(--ink-60); text-decoration:none; font-size:.88rem; font-weight:500; transition:color .2s; }
+  .nav-links a:hover { color:var(--ink); }
+  .nav-cta { background:var(--ink) !important; color:var(--bg) !important; padding:.5rem 1.3rem; border-radius:6px; font-weight:600 !important; transition:background .2s !important; }
+  .nav-cta:hover { background:var(--accent) !important; }
+  .nav-right { display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; justify-content:flex-end; }
+  .nav-login {
+    font-family:'Inter',sans-serif; font-size:.88rem; font-weight:600;
+    color:var(--ink-60); text-decoration:none; padding:.5rem 0;
+    border:none; background:transparent; cursor:pointer;
+    transition:color .2s;
+  }
+  .nav-login:hover { color:var(--ink); }
+
+  /* LEGAL PAGE */
+  .legal-page {
+    padding: 9rem 5vw 5rem;
+    position: relative; overflow: hidden;
+    flex: 1 0 auto;
+  }
+  .legal-page::before {
+    content:''; position:absolute; inset:0;
+    background-image: linear-gradient(var(--ink-08) 1px, transparent 1px), linear-gradient(90deg, var(--ink-08) 1px, transparent 1px);
+    background-size: 52px 52px; pointer-events:none;
+  }
+
+  .legal-header {
+    position: relative; z-index: 1;
+    max-width: 880px; margin: 0 auto 3rem;
+    text-align: center;
+  }
+  .section-eyebrow {
+    font-size:.75rem; text-transform:uppercase; letter-spacing:.12em;
+    font-weight:600; color:var(--accent); margin-bottom:.9rem;
+  }
+  .legal-header h1 {
+    font-family:'Inter',sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight:800; line-height:1.1; letter-spacing:-.025em; color:var(--ink);
+  }
+  .legal-meta {
+    margin-top: 1rem; font-size:.9rem; color: var(--ink-60);
+  }
+
+  .legal-layout {
+    position: relative; z-index: 1;
+    max-width: 1080px; margin: 0 auto;
+    display: grid; grid-template-columns: 240px 1fr; gap: 3rem;
+    align-items: start;
+  }
+
+  .legal-toc {
+    position: sticky; top: 6.5rem;
+    background: var(--bg);
+    border: 1px solid var(--ink-20);
+    border-radius: 12px;
+    padding: 1.4rem 1.4rem 1.6rem;
+  }
+  .legal-toc h4 {
+    font-family:'Inter',sans-serif; font-size:.7rem; font-weight:700;
+    text-transform:uppercase; letter-spacing:.12em;
+    color: var(--accent); margin-bottom: .9rem;
+  }
+  .legal-toc ol {
+    list-style: none; counter-reset: toc;
+    display: flex; flex-direction: column; gap: .55rem;
+  }
+  .legal-toc li { counter-increment: toc; }
+  .legal-toc a {
+    display: flex; align-items: baseline; gap: .55rem;
+    color: var(--ink-60); text-decoration: none;
+    font-size: .82rem; line-height: 1.45; transition: color .2s;
+  }
+  .legal-toc a::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family:'Inter',sans-serif; font-size:.7rem; font-weight:700;
+    color: var(--accent); flex-shrink: 0;
+  }
+  .legal-toc a:hover { color: var(--ink); }
+
+  .legal-content {
+    background: var(--bg);
+    border: 1px solid var(--ink-20);
+    border-radius: 14px;
+    padding: 2.5rem clamp(1.5rem, 4vw, 3rem);
+    box-shadow: 0 24px 64px rgba(30,42,31,.06);
+  }
+
+  .legal-content section { padding-top: 2rem; }
+  .legal-content section:first-child { padding-top: 0; }
+  .legal-content section + section {
+    border-top: 1px solid var(--ink-20);
+    margin-top: 2rem;
+  }
+
+  .legal-content h2 {
+    font-family:'Inter',sans-serif;
+    font-size: 1.4rem; font-weight: 700; line-height: 1.25;
+    color: var(--ink); margin-bottom: 1rem; letter-spacing: -.01em;
+  }
+  .legal-content h3 {
+    font-family:'Inter',sans-serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--ink); margin: 1.4rem 0 .6rem;
+  }
+  .legal-content p,
+  .legal-content li {
+    font-size: .95rem; line-height: 1.7; color: var(--ink);
+  }
+  .legal-content p + p { margin-top: .9rem; }
+  .legal-content ul {
+    list-style: none; margin: .8rem 0 .4rem; padding: 0;
+    display: flex; flex-direction: column; gap: .5rem;
+  }
+  .legal-content ul li {
+    position: relative; padding-left: 1.4rem;
+  }
+  .legal-content ul li::before {
+    content: ''; position: absolute; left: 0; top: .65rem;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+  .legal-content strong { color: var(--ink); }
+  .legal-content a {
+    color: var(--accent); text-decoration: underline;
+    text-underline-offset: 3px; text-decoration-thickness: 1px;
+  }
+  .legal-content a:hover { color: var(--ink); }
+
+  .legal-callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0 .4rem;
+    font-size: .9rem; color: var(--ink); line-height: 1.6;
+  }
+
+  .legal-content .upper {
+    text-transform: uppercase; letter-spacing: .04em; font-weight: 600;
+  }
+
+  .legal-back {
+    display: inline-flex; align-items: center; gap: .5rem;
+    margin-top: 2rem;
+    color: var(--accent); text-decoration: none;
+    font-family:'Inter',sans-serif; font-weight: 600; font-size: .9rem;
+  }
+  .legal-back:hover { color: var(--ink); }
+
+  /* FOOTER (shared with index) */
+  footer { background:var(--ink); padding:2.5rem 5vw; border-top:1px solid rgba(255,255,255,.06); }
+  .footer-inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.2rem; }
+  .footer-logo { font-family:'Inter',sans-serif; font-weight:800; font-size:1.3rem; color:var(--bg); text-decoration:none; }
+  .footer-logo span { color:var(--light-green); }
+  .footer-copy { font-size:.8rem; color:rgba(244,240,232,.28); }
+  .footer-links { display:flex; gap:1.5rem; flex-wrap: wrap; }
+  .footer-links a { color:rgba(244,240,232,.28); text-decoration:none; font-size:.8rem; transition:color .2s; }
+  .footer-links a:hover { color:rgba(244,240,232,.65); }
+
+  @media (max-width: 900px) {
+    .legal-layout { grid-template-columns: 1fr; }
+    .legal-toc { position: static; }
+  }
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">eko<span>brix</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#assistant">AI Assistant</a></li>
+      <li><a href="index.html#workflow">Workflow</a></li>
+      <li><a href="index.html#pricing">Pricing</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <a href="#" class="nav-login" id="nav-login" rel="noopener noreferrer">Log in</a>
+  </div>
+</nav>
+
+<main class="legal-page">
+  <header class="legal-header">
+    <div class="section-eyebrow">Legal</div>
+    <h1>License Agreement</h1>
+    <p class="legal-meta">Effective date: May 8, 2026 &middot; Last updated: May 8, 2026</p>
+  </header>
+
+  <div class="legal-layout">
+    <aside class="legal-toc">
+      <h4>On this page</h4>
+      <ol>
+        <li><a href="#acceptance">Acceptance of terms</a></li>
+        <li><a href="#license">License grant</a></li>
+        <li><a href="#accounts">Accounts &amp; eligibility</a></li>
+        <li><a href="#subscriptions">Subscriptions &amp; billing</a></li>
+        <li><a href="#acceptable-use">Acceptable use</a></li>
+        <li><a href="#customer-data">Customer data</a></li>
+        <li><a href="#ip">Intellectual property</a></li>
+        <li><a href="#ai-output">AI output</a></li>
+        <li><a href="#third-party">Third-party services</a></li>
+        <li><a href="#confidentiality">Confidentiality</a></li>
+        <li><a href="#term-termination">Term &amp; termination</a></li>
+        <li><a href="#warranty">Warranty disclaimer</a></li>
+        <li><a href="#liability">Limitation of liability</a></li>
+        <li><a href="#indemnification">Indemnification</a></li>
+        <li><a href="#governing-law">Governing law</a></li>
+        <li><a href="#changes">Changes to this agreement</a></li>
+        <li><a href="#general">General</a></li>
+        <li><a href="#contact">Contact us</a></li>
+      </ol>
+    </aside>
+
+    <article class="legal-content">
+      <section id="acceptance">
+        <h2>1. Acceptance of terms</h2>
+        <p>
+          This License Agreement (the &ldquo;<strong>Agreement</strong>&rdquo;) is a binding contract between you, or the entity you
+          represent (&ldquo;<strong>Customer</strong>&rdquo;, &ldquo;<strong>you</strong>&rdquo;), and EkoBrix (&ldquo;<strong>EkoBrix</strong>&rdquo;,
+          &ldquo;<strong>we</strong>&rdquo;, &ldquo;<strong>us</strong>&rdquo;). It governs your access to and use of the EkoBrix
+          web application, APIs, mobile clients, and related services (collectively, the &ldquo;<strong>Services</strong>&rdquo;).
+        </p>
+        <p>
+          By creating an account, clicking &ldquo;I agree&rdquo;, or otherwise accessing or using the Services, you agree to be bound
+          by this Agreement. If you do not agree, you may not use the Services. If you are accepting this Agreement on
+          behalf of a company or other legal entity, you represent that you have the authority to bind that entity.
+        </p>
+      </section>
+
+      <section id="license">
+        <h2>2. License grant</h2>
+        <p>
+          Subject to your compliance with this Agreement and payment of all applicable fees, EkoBrix grants you a
+          limited, non-exclusive, non-transferable, non-sublicensable, revocable license during your subscription term to
+          access and use the Services solely for your internal business operations.
+        </p>
+        <p>You will not, and will not permit any third party to:</p>
+        <ul>
+          <li>Copy, modify, translate, or create derivative works of the Services.</li>
+          <li>Reverse engineer, decompile, or attempt to derive the source code or underlying ideas of the Services, except to the extent expressly permitted by applicable law.</li>
+          <li>Rent, lease, lend, sell, sublicense, or otherwise transfer the Services to any third party.</li>
+          <li>Use the Services to build a competing product, or to benchmark its performance for that purpose.</li>
+          <li>Remove or obscure any proprietary notices, labels, or marks contained in the Services.</li>
+        </ul>
+      </section>
+
+      <section id="accounts">
+        <h2>3. Accounts &amp; eligibility</h2>
+        <p>
+          You must be at least 18 years old and capable of entering into a binding contract to use the Services. You are
+          responsible for maintaining the confidentiality of your account credentials and for all activities that occur
+          under your account. Notify us promptly at <a href="mailto:arik@ekobrix.com">arik@ekobrix.com</a> of any
+          unauthorized use of your account.
+        </p>
+        <p>
+          You are responsible for the conduct of users on your workspace, including users you invite, and for ensuring
+          that they comply with this Agreement.
+        </p>
+      </section>
+
+      <section id="subscriptions">
+        <h2>4. Subscriptions &amp; billing</h2>
+        <h3>4.1 Plans &amp; fees</h3>
+        <p>
+          Access to the paid Services requires an active subscription. Plan tiers, included features, user limits, and
+          fees are described on our <a href="index.html#pricing">pricing page</a> or in your order form. All fees are
+          stated in U.S. dollars unless otherwise noted and are exclusive of taxes, which you are responsible for paying.
+        </p>
+
+        <h3>4.2 Billing &amp; renewal</h3>
+        <p>
+          Subscriptions are billed in advance on a monthly or annual basis as selected at checkout and renew
+          automatically for successive periods of the same length unless cancelled before the renewal date. Payments are
+          processed by our payment processor (Stripe). Failure to pay any fees when due may result in suspension or
+          termination of the Services.
+        </p>
+
+        <h3>4.3 Changes &amp; cancellation</h3>
+        <p>
+          You may upgrade, downgrade, or cancel your subscription from your account settings. Cancellations take effect
+          at the end of the then-current billing period. Except as required by law or expressly stated in this Agreement,
+          fees are non-refundable.
+        </p>
+
+        <h3>4.4 Free or beta features</h3>
+        <p>
+          From time to time we may offer free trials, beta features, or early access programs. Such features are
+          provided &ldquo;as is&rdquo; without warranty, may be modified or discontinued at any time, and may be subject to additional
+          terms.
+        </p>
+      </section>
+
+      <section id="acceptable-use">
+        <h2>5. Acceptable use</h2>
+        <p>You agree not to use the Services to:</p>
+        <ul>
+          <li>Violate any applicable law, regulation, or third-party right.</li>
+          <li>Upload or transmit any content that is unlawful, infringing, defamatory, harassing, or otherwise objectionable.</li>
+          <li>Distribute viruses, malware, or other malicious code, or interfere with the integrity, performance, or security of the Services.</li>
+          <li>Attempt to gain unauthorized access to the Services or related systems, accounts, or networks.</li>
+          <li>Send spam or other unsolicited bulk communications.</li>
+          <li>Use automated means to access the Services other than via APIs we expressly provide, or exceed reasonable usage volumes.</li>
+        </ul>
+        <p>
+          We may investigate suspected violations and, at our discretion, suspend or terminate access where we believe
+          this Agreement has been breached.
+        </p>
+      </section>
+
+      <section id="customer-data">
+        <h2>6. Customer data</h2>
+        <p>
+          &ldquo;<strong>Customer Data</strong>&rdquo; means any data, files, documents, drawings, schedules, messages, or other
+          content that you or your users submit to the Services. As between you and EkoBrix, you retain all right, title,
+          and interest in and to your Customer Data.
+        </p>
+        <p>
+          You grant EkoBrix a worldwide, non-exclusive, royalty-free license to host, copy, transmit, display, and
+          process Customer Data solely as necessary to provide, secure, and improve the Services, to prevent or address
+          technical or security issues, and to comply with legal requirements.
+        </p>
+        <p>
+          You represent that you have all rights, consents, and authority necessary to submit Customer Data to the
+          Services and to grant the license above. You are responsible for the accuracy, quality, and legality of
+          Customer Data and for the means by which you acquired it.
+        </p>
+      </section>
+
+      <section id="ip">
+        <h2>7. Intellectual property</h2>
+        <p>
+          The Services, including all software, designs, models, content, and trademarks (other than Customer Data), are
+          and will remain the exclusive property of EkoBrix and its licensors. All rights not expressly granted in this
+          Agreement are reserved. No license is granted by implication, estoppel, or otherwise.
+        </p>
+        <p>
+          If you provide feedback, suggestions, or ideas about the Services, you grant EkoBrix a perpetual, irrevocable,
+          royalty-free license to use them for any purpose without obligation to you.
+        </p>
+      </section>
+
+      <section id="ai-output">
+        <h2>8. AI output</h2>
+        <p>
+          The Services include AI-powered features that generate output such as summaries, schedules, forecasts, and
+          recommendations (&ldquo;<strong>AI Output</strong>&rdquo;) based on Customer Data and other inputs.
+        </p>
+        <div class="legal-callout">
+          AI Output is generated probabilistically and may be inaccurate, incomplete, or unsuitable for your use case.
+          You are solely responsible for reviewing and validating AI Output before relying on it for any decision,
+          particularly in safety-, budget-, or compliance-critical contexts. EkoBrix does not guarantee the accuracy of
+          AI Output.
+        </div>
+        <p>
+          As between you and EkoBrix, and to the extent permitted by applicable law, you own AI Output generated for
+          your workspace based on your Customer Data, subject to the rights of EkoBrix and any underlying model
+          providers in the underlying models and infrastructure.
+        </p>
+      </section>
+
+      <section id="third-party">
+        <h2>9. Third-party services</h2>
+        <p>
+          The Services may integrate with or rely on third-party products and services (such as cloud hosting, payment
+          processing, AI providers, and customer-enabled integrations). EkoBrix is not responsible for any third-party
+          service, and your use of any third-party service is governed by that provider&rsquo;s terms.
+        </p>
+      </section>
+
+      <section id="confidentiality">
+        <h2>10. Confidentiality</h2>
+        <p>
+          Each party may have access to non-public information of the other (&ldquo;<strong>Confidential Information</strong>&rdquo;).
+          Each party agrees to use the other&rsquo;s Confidential Information only as needed to perform under this Agreement
+          and to protect it with at least the same care it uses to protect its own confidential information of like
+          importance, but in no event less than reasonable care. Confidential Information does not include information
+          that is publicly available, independently developed, or rightfully received from a third party without
+          confidentiality obligations.
+        </p>
+      </section>
+
+      <section id="term-termination">
+        <h2>11. Term &amp; termination</h2>
+        <p>
+          This Agreement begins when you first accept it and continues until your subscription is terminated. Either
+          party may terminate this Agreement for material breach if the breach is not cured within 30 days of written
+          notice. We may suspend or terminate your access immediately if you violate <a href="#acceptable-use">Section 5
+          (Acceptable use)</a>, fail to pay fees when due, or if required by law.
+        </p>
+        <p>
+          On termination: (a) your right to use the Services ceases; (b) all unpaid fees become immediately due; and
+          (c) we may delete Customer Data after a reasonable retention period unless you have requested export. Sections
+          intended to survive termination (including ownership, disclaimers, limitations of liability, indemnification,
+          and governing law) will survive.
+        </p>
+      </section>
+
+      <section id="warranty">
+        <h2>12. Warranty disclaimer</h2>
+        <p class="upper">
+          The services are provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without warranty of any kind,
+          whether express, implied, or statutory. To the maximum extent permitted by applicable law, ekobrix disclaims
+          all warranties, including any implied warranties of merchantability, fitness for a particular purpose, title,
+          and non-infringement, and any warranties arising out of course of dealing or usage of trade.
+        </p>
+        <p>
+          EkoBrix does not warrant that the Services will be uninterrupted, error-free, or completely secure, or that
+          AI Output will be accurate or fit for any specific purpose.
+        </p>
+      </section>
+
+      <section id="liability">
+        <h2>13. Limitation of liability</h2>
+        <p class="upper">
+          To the maximum extent permitted by applicable law, in no event will ekobrix or its suppliers be liable for any
+          indirect, incidental, consequential, special, exemplary, or punitive damages, or for any loss of profits,
+          revenue, data, goodwill, or use, arising out of or related to this agreement or the services, whether based on
+          contract, tort, or any other legal theory, even if advised of the possibility of such damages.
+        </p>
+        <p class="upper">
+          Ekobrix&rsquo;s total aggregate liability for all claims arising out of or related to this agreement will not
+          exceed the amounts paid by customer to ekobrix for the services in the twelve (12) months immediately preceding
+          the event giving rise to the claim.
+        </p>
+      </section>
+
+      <section id="indemnification">
+        <h2>14. Indemnification</h2>
+        <p>
+          You agree to indemnify, defend, and hold harmless EkoBrix and its officers, directors, employees, and agents
+          from and against any third-party claims, losses, damages, liabilities, and expenses (including reasonable
+          attorneys&rsquo; fees) arising out of or related to: (a) your Customer Data; (b) your use of the Services in
+          breach of this Agreement; or (c) your violation of any applicable law or third-party right.
+        </p>
+      </section>
+
+      <section id="governing-law">
+        <h2>15. Governing law</h2>
+        <p>
+          This Agreement is governed by and construed in accordance with the laws of the jurisdiction in which EkoBrix
+          is established, without regard to its conflict-of-laws principles. The parties consent to the exclusive
+          jurisdiction of the courts located in that jurisdiction for any dispute arising out of or related to this
+          Agreement, except that either party may seek injunctive relief in any court of competent jurisdiction to
+          protect its intellectual property or confidential information.
+        </p>
+      </section>
+
+      <section id="changes">
+        <h2>16. Changes to this agreement</h2>
+        <p>
+          We may update this Agreement from time to time. If we make material changes, we will notify you by updating
+          the &ldquo;Effective date&rdquo; above and, where appropriate, by email or in-product notice. Your continued use of the
+          Services after the changes take effect constitutes acceptance of the updated Agreement.
+        </p>
+      </section>
+
+      <section id="general">
+        <h2>17. General</h2>
+        <p>
+          This Agreement, together with any order forms, constitutes the entire agreement between the parties regarding
+          the Services and supersedes all prior or contemporaneous agreements. If any provision is held unenforceable,
+          the remaining provisions will remain in full force. Failure to enforce any right is not a waiver. You may not
+          assign this Agreement without our prior written consent; we may assign it in connection with a merger,
+          acquisition, or sale of assets. Notices to EkoBrix should be sent to
+          <a href="mailto:arik@ekobrix.com">arik@ekobrix.com</a>.
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2>18. Contact us</h2>
+        <p>
+          If you have questions about this License Agreement, please contact us at
+          <a href="mailto:arik@ekobrix.com">arik@ekobrix.com</a>.
+        </p>
+        <a href="index.html" class="legal-back">&larr; Back to home</a>
+      </section>
+    </article>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">eko<span>brix</span></a>
+    <div class="footer-copy">&copy; 2026 EkoBrix All rights reserved.</div>
+    <div class="footer-links">
+      <a href="index.html#pricing">Pricing</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="license-agreement.html">License Agreement</a>
+      <a href="#" id="footer-login" rel="noopener noreferrer">Log in</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    function getDashboardBase() {
+      var meta = document.querySelector('meta[name="ecobrix-dashboard-url"]');
+      var c = meta && meta.getAttribute('content');
+      if (c && String(c).trim()) return String(c).replace(/\/$/, '');
+      return 'https://app-dev.ekobrix.com';
+    }
+    var loginUrl = getDashboardBase() + '/login';
+    ['nav-login', 'footer-login'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.setAttribute('href', loginUrl);
+    });
+  })();
+</script>
+</body>
+</html>
